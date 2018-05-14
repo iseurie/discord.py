@@ -462,9 +462,9 @@ class HTTPClient:
         r = Route('DELETE', '/guilds/{guild_id}/bans/{user_id}', guild_id=guild_id, user_id=user_id)
         return self.request(r, reason=reason)
 
-    def add(self, user_id, guild_id):
-        # requires CREATE_INSTANT_INVITE permissions, fires GUILD_MEMBER_ADD
-        # event
+    def add_to_guild(self, user_id, guild_id):
+        # requires CREATE_INSTANT_INVITE permissions and guild.join OAuth scope
+        # on target user ID; fires GUILD_MEMBER_ADD event
         r = Route('PUT', '/guilds/{guilds_id}/members/{user_id}')
         return self.request(r)
 
