@@ -27,6 +27,7 @@ DEALINGS IN THE SOFTWARE.
 from .utils import snowflake_time, _bytes_to_base64_data, parse_time, valid_icon_size
 from .enums import DefaultAvatar, RelationshipType, UserFlags
 from .errors import ClientException, InvalidArgument
+from .member import Member
 
 from collections import namedtuple
 
@@ -397,6 +398,11 @@ class ClientUser(BaseUser):
 
         # manually update data by calling __init__ explicitly.
         self.__init__(state=self._state, data=data)
+
+    @asyncio.coroutine
+    def join_guild(self, id):
+        data = yield from self._state.http.add_to_guild(self.id, id)
+        return Member(data)
 
     @asyncio.coroutine
     def create_group(self, *recipients):
