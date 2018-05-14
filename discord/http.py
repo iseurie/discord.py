@@ -462,7 +462,7 @@ class HTTPClient:
         r = Route('DELETE', '/guilds/{guild_id}/bans/{user_id}', guild_id=guild_id, user_id=user_id)
         return self.request(r, reason=reason)
 
-    def join_to(self, user_id, guild_id):
+    def add(self, user_id, guild_id):
         r = Route('PUT', '/guilds/{guilds_id}/members/{user_id}')
         return self.request(r)
 
